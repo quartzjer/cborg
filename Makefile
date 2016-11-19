@@ -14,11 +14,11 @@ CFLAGS += -Iinclude
 all: cntest
 
 test: cntest
-	(cd test; env MallocStackLogging=true ../cntest) >new.out
-	-diff new.out test/expected.out
+	cd test; env MallocStackLogging=true ./cntest >new.out
+	-diff test/new.out test/expected.out
 
 cntest: src/cbor.h include/cn-cbor/cn-cbor.h src/cn-cbor.c src/cn-error.c src/cn-get.c test/test.c
-	clang $(CFLAGS) src/cn-cbor.c src/cn-error.c src/cn-get.c test/test.c -o cntest
+	clang $(CFLAGS) src/cn-cbor.c src/cn-error.c src/cn-get.c test/test.c -o test/cntest
 
 size: cn-cbor.o
 	size cn-cbor.o
